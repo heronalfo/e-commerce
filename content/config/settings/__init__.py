@@ -7,3 +7,4 @@ from .static import *
 from .template import *
 from .i18n import *
 from .django import *
+from .simple_jwt import *

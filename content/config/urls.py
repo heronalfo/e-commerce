@@ -15,12 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from .swagger import schema_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', schema_view.with_ui('swagger'), name='schema-swagger-ui'),  
     path('redoc/', schema_view.with_ui('redoc'), name='schema-redoc'),
+    path('accounts/', include('accounts.routers')),
     
 ]
