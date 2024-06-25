@@ -39,10 +39,10 @@ E-commerce project built with Django.
 
 ## Configure Environment Variables
 
-1. Rename the `env.py.example` file to `env.py`:
+1. Rename the `env-example.py` file to `env.py`:
 
    ```bash
-   mv env.py.example env.py
+   mv env-example.py env.py
    ```
 
 2. Edit the `env.py` file and configure necessary variables such as secret keys, database settings, etc.
