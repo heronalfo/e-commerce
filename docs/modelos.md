@@ -23,6 +23,13 @@
    - `phone_number`: Número de telefone do cliente (opcional)
    - `address`: Endereço do cliente (opcional)
    - `date_registered`: Data de registro do cliente
+   - `name`: Nome do cliente (opcional)
+   - `about`: Descrição do cliente (opcional)
+   - `cpf`: Cpf do cliente (opcional)
+   - `cep`: Localidade brasileira do cliente (opcional)
+   - `numer`: Número do cliente (opcional)
+   - `address`: Endereço do cliente (opcional)
+   - `is_seller`: Verifica se é vendedor (opcional) 
 
 4. **Order (Pedido)**:
    - `id`: Identificador único do pedido (chave primária)

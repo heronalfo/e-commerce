@@ -2,15 +2,16 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.status import (HTTP_400_BAD_REQUEST)
 from re import compile, match
+from .models import Costumer
 
-class UserSerializer(serializers.ModelSerializer):
+class CostumerSerializer(serializers.ModelSerializer):
     '''
     Proper cleaning of received data,
     checks the length, naming pattern,
     and whether there is 
     '''
     class Meta:
-        model = User
+        model = Costumer
         fields = ['id', 'username', 'password']
         read_only_fields = ['id',] 
                        

@@ -10,15 +10,16 @@ from rest_framework_xml.renderers import XMLRenderer
 
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import UserSerializer
+from .serializers import CostumerSerializer
+from .models import Costumer
 from .permissions import IsOwnerOfUser
 
 class UserModelViewSet(ModelViewSet):
     '''    
     Viewset for creating, updating and editing the user to obtain their access token
     '''
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+    serializer_class = CostumerSerializer
+    queryset = Costumer.objects.all()
     parser_classes = [JSONParser,  XMLParser]
     renderer_classes = [JSONRenderer, XMLRenderer]
     http_method_names = ['post', 'delete', 'patch', 'head', 'options']

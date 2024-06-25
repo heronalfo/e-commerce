@@ -3,11 +3,12 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
+from ..models import Costumer
 
 class BaseAccountsTest(TestCase):
     def setUp(self):    
         self.client = APIClient()
-        self.user = User.objects.create_user(username='client-test', password='Abc123_')
+        self.user = Costumer.objects.create_user(username='client-test', password='Abc123_')
         self.client.force_authenticate(self.user)
         
         self.refresh = RefreshToken.for_user(user=self.user)
