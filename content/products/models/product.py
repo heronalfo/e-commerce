@@ -6,7 +6,7 @@ class Product(models.Model):
     '''
     Registration of products available for sale, name, category, price, and... 
     '''
-    seller = models.ForeignKey(Costumer, on_delete=models.CASCADE, related_name='user')
+    seller = models.ForeignKey(Costumer, on_delete=models.CASCADE, related_name='costumer')
     name = models.CharField(max_length=64, db_index=True)
     description = models.CharField(max_length=5000)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, related_name='category')

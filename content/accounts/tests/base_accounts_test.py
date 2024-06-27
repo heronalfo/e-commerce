@@ -19,7 +19,7 @@ class BaseAccountsTest(TestCase):
         
         self.data = {      
           'username': 'client-test-other',
-          'password': 'AbC1234_' 
+          'password': 'AbC1234_',
         }
         
     def post(self, data):   
@@ -28,7 +28,7 @@ class BaseAccountsTest(TestCase):
     def patch(self, data=None):
         payload = {      
           'username': 'client-test-edit',
-          'password': 'AbC1234_' 
+          'password': 'AbC1234_',
         }
             
         create = self.post(payload)                       

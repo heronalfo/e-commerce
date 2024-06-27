@@ -7,13 +7,13 @@ from django.db import models
 class Costumer(AbstractUser):
     name = models.CharField(max_length=32, null=True)
     about = models.CharField(max_length=324, null=True)
-    cpf = models.CharField(max_length=15, null=True)
-    cep = models.CharField(max_length=24, null=True)
-    number = models.CharField(max_length=24, null=True)
+    cpf = models.CharField(max_length=15, unique=True, db_index=True, null=True)
+    cep = models.CharField(max_length=24, db_index=True, null=True)
+    number = models.CharField(max_length=24, db_index=True, unique=True, null=True)
     address = models.CharField(max_length=292, null=True)
-    cnpj = models.CharField(max_length=34, null=True)    
+    cnpj = models.CharField(max_length=34, unique=True, null=True)    
     is_seller = models.BooleanField(default=False)
-    
+        
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='custom_user_set',
@@ -28,3 +28,7 @@ class Costumer(AbstractUser):
         help_text='Specific permissions for this user.',
         verbose_name='user permissions'
     )
+    
+    class Meta:
+        verbose_name = 'costumer',
+        verbose_name_plural = 'costumers'

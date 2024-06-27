@@ -12,7 +12,7 @@ class Payment(models.Model):
         ('C', 'Cartão de crédito'),
     ]
     
-    customer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Costumer, on_delete=models.CASCADE, related_name='payment')
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     payment_date = models.DateTimeField(auto_now_add=True)
     amount = models.FloatField()

@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
 from rest_framework.permissions import IsAuthenticated
@@ -23,6 +24,15 @@ class UserModelViewSet(ModelViewSet):
     parser_classes = [JSONParser,  XMLParser]
     renderer_classes = [JSONRenderer, XMLRenderer]
     http_method_names = ['post', 'delete', 'patch', 'head', 'options']
+    
+    def perform_create(self, serializer):
+        data = serializer.validated_data
+        username = data.get('username', None)
+        password = data.get('password', None)              
+        Costumer.objects.create_user(username=username, password=password, is_staff=True, is_active=True)
+        
+        return Response()
+        
     
     def get_object(self):
         '''
