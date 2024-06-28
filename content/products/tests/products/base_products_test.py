@@ -1,6 +1,6 @@
 from django.urls import reverse
 from accounts.tests.base_accounts_test import BaseAccountsTest
-from ..models import Category
+from products.models import Category
 import pdb
 
 class BaseProductsTest(BaseAccountsTest):
