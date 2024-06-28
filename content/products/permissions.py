@@ -1,4 +1,5 @@
 from rest_framework.permissions import BasePermission
+import pdb
 
 class IsSeller(BasePermission):
     '''
@@ -8,7 +9,7 @@ class IsSeller(BasePermission):
      Checks if the class user is a seller
     '''
     def has_object_permission(self, request, view, obj):
-        return request.user and request.is_authenticated and request.user.is_seller
+        return request.user.is_seller == True
         
     def has_permission(self, request, view):
-        return request.user and request.is_authenticated and request.user.is_seller
+        return request.user.is_seller == True

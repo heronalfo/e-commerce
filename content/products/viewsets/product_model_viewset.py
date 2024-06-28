@@ -10,12 +10,12 @@ from rest_framework_xml.parsers import XMLParser
 from rest_framework_xml.renderers import XMLRenderer
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import ProductSerializer
-from .models import Product
-from .permissions import IsSeller
+from ..serializers import ProductModelSerializer
+from ..models import Product
+from ..permissions import IsSeller
 
 class ProductModelViewSet(ModelViewSet):
-    serializer_class = ProductSerializer
+    serializer_class = ProductModelSerializer
     queryset = Product.objects.all()
     parser_classes = [JSONParser, XMLParser]
     renderer_classes = [JSONRenderer, XMLRenderer]

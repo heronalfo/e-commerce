@@ -13,7 +13,7 @@ class Product(models.Model):
     price = models.FloatField()
     brand = models.CharField(max_length=64, blank=True, null=True)
     image = models.FileField(upload_to='images/', blank=True, null=True)
-    stock = models.IntegerField()
+    stock = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:    

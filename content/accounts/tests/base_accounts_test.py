@@ -8,7 +8,7 @@ from ..models import Costumer
 class BaseAccountsTest(TestCase):
     def setUp(self):    
         self.client = APIClient()
-        self.user = Costumer.objects.create_user(username='client-test', password='Abc123_')
+        self.user = Costumer.objects.create_user(username='client-test', password='Abc123_', is_seller=True)
         self.client.force_authenticate(self.user)
         
         self.refresh = RefreshToken.for_user(user=self.user)

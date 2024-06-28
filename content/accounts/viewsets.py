@@ -25,15 +25,6 @@ class UserModelViewSet(ModelViewSet):
     renderer_classes = [JSONRenderer, XMLRenderer]
     http_method_names = ['post', 'delete', 'patch', 'head', 'options']
     
-    def perform_create(self, serializer):
-        data = serializer.validated_data
-        username = data.get('username', None)
-        password = data.get('password', None)              
-        Costumer.objects.create_user(username=username, password=password, is_staff=True, is_active=True)
-        
-        return Response()
-        
-    
     def get_object(self):
         '''
         Get the object (user) and apply the appropriate permissions        
