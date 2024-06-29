@@ -17,10 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: config/settings/i18n.py:6
 msgid "English"
-msgstr ""
+msgstr "Inglês"
 
 #: config/settings/i18n.py:7
 msgid "Portuguese"
-msgstr ""
+msgstr "Português"
+
+msgid "The username must not be longer than 32 characters"
+msgstr "O nome de usuário não deve ter mais de 32 caracteres"
+
+msgid "This username has already been registered"
+msgstr "Este nome de usuário já foi registrado"
+
+msgid "Password must contain at least 8 characters"
+msgstr "A senha deve conter pelo menos 8 caracteres"
+
+msgid "The name for username is invalid, it should be like: username-name"
+msgstr "O nome de usuário é inválido, deve ser como: nome-de-usuário"
+
+msgid "The CPF sent does not comply with Brazilian standards. Example: 123.456.789.01"
+msgstr "O CPF enviado não está em conformidade com os padrões brasileiros. Exemplo: 123.456.789.01"
+
+msgid "The CEP sent does not comply with Brazilian standards. Example: 12345-678"
+msgstr "O CEP enviado não está em conformidade com os padrões brasileiros. Exemplo: 12345-678"
+
+msgid "The NUMBER sent does not comply with Brazilian standards. Example: +55 (11) 9 1234 5678"
+msgstr "O NÚMERO enviado não está em conformidade com os padrões brasileiros. Exemplo: +55 (11) 9 1234 5678"
+
+msgid "The entered category does not exist in the database"
+msgstr "A categoria inserida não existe no banco de dados"
+
+msgid "The price must be greater than 0"
+msgstr "O preço deve ser maior que 0"
+
+msgid "It is not possible to register with a number less than 0"
+msgstr "Não é possível registrar um número menor que 0"
+
+msgid "The entered product does not exist in the database"
+msgstr "O produto inserido não existe no banco de dados"
+
+msgid "The rating cannot be less than 1 nor greater than 5"
+msgstr "A classificação não pode ser inferior a 1 nem superior a 5"

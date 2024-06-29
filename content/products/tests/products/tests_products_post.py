@@ -19,10 +19,9 @@ class ProductModelViewSetPostTest(BaseProductsTest):
         
     def test_if_is_allowed_price_less_than_0(self):
         self.data['price'] = -1
-        response = self.post(self.data)
-        
+        response = self.post(self.data)   
         self.assertEqual(response.status_code, 400)
-        self.assertIn('0', response.data['price']['message'])
+        self.assertIn('0', response.data['price'][0])
         
     def test_if_is_allowed_stock_less_than_0(self):
         self.data['stock'] = -1

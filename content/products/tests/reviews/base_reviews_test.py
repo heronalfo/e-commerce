@@ -1,4 +1,5 @@
 from django.urls import reverse
+from rest_framework.test import APIClient
 from accounts.tests.base_accounts_test import BaseAccountsTest
 from products.models import Product, Category
 import pdb
@@ -6,7 +7,8 @@ import pdb
 class BaseReviewsTest(BaseAccountsTest):
     def setUp(self):    
         super().setUp()
-        
+        self.client_not_authenticate = APIClient()
+                
         self.category = Category.objects.create(name='SmartPhone', description='cell phone model')  
         self.api_url = reverse('products:reviews-list')
         self.product = Product.objects.create(
@@ -25,7 +27,15 @@ class BaseReviewsTest(BaseAccountsTest):
            'rating': 5
         }
         
-    def patch(self, data=None):
+    def post(self, data=None, authenticate=True):
+        if authenticate:
+            return self.client.post(self.api_url, data, format='json')
+        
+        return self.client.post(self.api_url, data, format='json')
+
+
+        
+    def patch(self, data=None, authenticate=True):
         payload = {      
            'product_id': self.product.id,
            'comment': 'Product arrived successfully, says it is what it is, perfect!',
@@ -34,5 +44,10 @@ class BaseReviewsTest(BaseAccountsTest):
         
         create = self.post(payload)                      
         api_url = reverse('products:reviews-detail', kwargs={'pk': create.data['id']})       
-                 
-        return self.client.patch(api_url, data, format='json')
+        
+        if authenticate:       
+            return self.client.patch(api_url, data, format='json')
+            
+        return self.client_not_authenticate.patch(api_url, data, format='json')
+
+        

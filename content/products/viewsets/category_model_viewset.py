@@ -6,6 +6,9 @@ from ..serializers import CategoryModelSerializer
 class CategoryModelViewSet(ProductModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategoryModelSerializer
+    
+    def perform_create(self, serializer):
+        serializer.save()
              
     @swagger_auto_schema(
         operation_description='Create a new category. Only costumers and sellers can create categories.',

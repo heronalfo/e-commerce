@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, override_settings
+from django.utils.translation import activate
 from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -8,6 +9,7 @@ from ..models import Costumer
 class BaseAccountsTest(TestCase):
     def setUp(self):    
         self.client = APIClient()
+        
         self.user = Costumer.objects.create_user(username='client-test', password='Abc123_', is_seller=True)
         self.client.force_authenticate(self.user)
         
@@ -15,6 +17,7 @@ class BaseAccountsTest(TestCase):
         self.token = str(self.refresh.access_token)
         
         self.client.credentials(HTTP_AUTHORIZATION='Bearer {self.token}')
+                
         self.api_url = reverse('accounts:accounts-list')
         
         self.data = {      
@@ -22,9 +25,15 @@ class BaseAccountsTest(TestCase):
           'password': 'AbC1234_',
         }
         
-    def post(self, data):   
-        return self.client.post(self.api_url, data, format='json')
+    @override_settings(LANGUAGE_CODE='pt')
+    def _post(self, data=None):
+        activate('pt')
         
+        return self.client.post(self.api_url, data, format='json')
+                                                                                
+    def post(self, data=None):                           
+        return self.client.post(self.api_url, data, format='json')
+                
     def patch(self, data=None):
         payload = {      
           'username': 'client-test-edit',

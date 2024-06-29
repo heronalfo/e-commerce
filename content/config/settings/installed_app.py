@@ -1,3 +1,4 @@
+# Extensions for Django 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -6,8 +7,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework_simplejwt',
-    'drf_yasg',
-    'rest_framework',
-    'accounts',
-    'products',
+    'drf_yasg', #SWAGGER
+    'rest_framework', #DJANGO REST FRAMEWORK
+    'accounts', #APP
+    'products', #APP
 ]
