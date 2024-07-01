@@ -1,6 +1,7 @@
 from django.db import models
 from .product import Product
 from accounts.models import Costumer
+
 class Order(models.Model):
     '''
     Shopping cart, list of products purchased, total price and shipping status 

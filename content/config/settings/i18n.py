@@ -6,7 +6,8 @@ from os.path import join
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 LANGUAGES = [
     ('en', _('English')),
-    ('pt', _('Portuguese')),   
+    ('pt', _('Portuguese')),
+    ('es', _('Spanish')),
 ]
 
 # Translation storage location
@@ -17,4 +18,5 @@ LOCALE_PATHS = [
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
+USE_L10N = True
 USE_TZ = True

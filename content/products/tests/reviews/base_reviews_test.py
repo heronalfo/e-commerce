@@ -31,7 +31,7 @@ class BaseReviewsTest(BaseAccountsTest):
         if authenticate:
             return self.client.post(self.api_url, data, format='json')
         
-        return self.client.post(self.api_url, data, format='json')
+        return self.client_not_authenticate.post(self.api_url, data, format='json')
 
 
         

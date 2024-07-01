@@ -1,5 +1,5 @@
 '''
-  Documentation Swagger, for the use and application of the API. Addition of licenses and usage rights, for more informations: https://drf-yasg.readthedocs.io/en/stable/readme.html
+Documentation Swagger, for the use and application of the API. Addition of licenses and usage rights, for more informations: https://drf-yasg.readthedocs.io/en/stable/readme.html
 '''
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -15,6 +15,6 @@ schema_view = get_schema_view(
     ),
     
     public=True,
-    permission_classes = (permissions.AllowAny,  ),
+    permission_classes=(permissions.AllowAny,  ),
 
 )

@@ -44,9 +44,6 @@ class ProductModelViewSet(ModelViewSet):
             return [IsSeller()]
         return super().get_permissions()
         
-    def list(self, *args, **kwargs):
-        return list(*args, **kwargs)
-        
     @swagger_auto_schema(
         operation_description='Create a new product. Only sellers can create products.',
         responses={
