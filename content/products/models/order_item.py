@@ -1,14 +1,13 @@
 from django.db import models
 from .product import Product
-from .order import Order
 
 class OrderItem(models.Model):
     '''
     Product added to shopping cart, quantity and price 
     '''
-    id = models.AutoField(primary_key=True)
+    
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    #order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     unit_price = models.DecimalField(max_digits=8, decimal_places=2)
 

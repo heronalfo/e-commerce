@@ -1,16 +1,28 @@
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
 from rest_framework.permissions import IsAuthenticated
+
+from rest_framework_xml.renderers import XMLRenderer
+from rest_framework_xml.parsers import XMLParser
+
 from drf_yasg.utils import swagger_auto_schema
 from .product_model_viewset import ProductModelViewSet
 from ..serializers import OrderModelSerializer
 from ..permissions import IsOwner
 from ..models import Order
 
-class OrderModelViewSet(ProductModelViewSet):
+class OrderModelViewSet(ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderModelSerializer
+    parser_classes = [JSONParser, XMLParser]
+    renderer_classes = [JSONRenderer, XMLRenderer]
+    http_method_names = ['get', 'post', 'delete', 'patch', 'head', 'options']
+
     
     def perform_create(self, serializer):       
-        order = serializer.save(customer=self.request.user)
+        serializer.save(customer=self.request.user)
+        return super().perform_create(serializer)
     
     def perform_update(self, serializer):
         add_product = serializer.validated_data.pop('add_product', [])
