@@ -4,7 +4,7 @@ from accounts.models import Costumer
 
 class Order(models.Model):
     customer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
-    products = models.ManyToManyField('Product', related_name='orders')
+    products = models.ManyToManyField('OrderItem', related_name='orders')
     ordered_at = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
     # = models.CharField(max_length=100, null=True, blank=True)

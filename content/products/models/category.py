@@ -4,7 +4,7 @@ class Category(models.Model):
     '''
     Classification, product type and identity such as clothes, electronic devices, and...
     '''
-    name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=32)
     description = models.CharField(max_length=124)
     
     class Meta:

@@ -24,22 +24,22 @@ class OrderModelViewSet(ModelViewSet):
         serializer.save(customer=self.request.user)
         return super().perform_create(serializer)
     
-    def perform_update(self, serializer):
-        add_product = serializer.validated_data.pop('add_product', [])
-        remove_products = serializer.validated_data.pop('remove_products', [])
-        order = serializer.save()
+    # def perform_update(self, serializer):
+        # add_product = serializer.validated_data.pop('add_product', [])
+        # remove_products = serializer.validated_data.pop('remove_products', [])
+        # order = serializer.save()
          
-        if add_product:
-            order.products.add(*add_product)
+        # if add_product:
+            # order.products.add(*add_product)
                                 
-        if remove_products:
-            order.products.remove(*remove_products) 
+        # if remove_products:
+            # order.products.remove(*remove_products) 
                    
     def get_permissions(self):
         if self.action == 'create':
             return [IsAuthenticated()]
-        elif self.action in ['list', 'destroy', 'update']:
-            return [IsOwner()]
+        elif self.action in ['list', 'destroy', 'partial_update']:
+            return [IsAuthenticated(), IsOwner()]
         return super().get_permissions()
      
     @swagger_auto_schema(

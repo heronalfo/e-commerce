@@ -16,4 +16,4 @@ class IsSeller(BasePermission):
 
 class IsOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
-        return obj.costumer == self.request.user
+        return obj.customer == request.user

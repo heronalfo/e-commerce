@@ -1,59 +1,56 @@
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
-from .product_model_serializer import ProductModelSerializer
-from ..models import Order, Product
+from .order_item_model_serializer import OrderItemModelSerializer
+from ..models import Order, OrderItem
 
 class OrderModelSerializer(serializers.ModelSerializer):
-    add_product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), many=False, write_only=True, required=False)
-    remove_products = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), many=True, write_only=True, required=False)
-    products = ProductModelSerializer(many=True, read_only=True)
-
+    order = serializers.PrimaryKeyRelatedField(queryset=Order.objects.all(), many=False, write_only=True, required=False)
+    item = serializers.PrimaryKeyRelatedField(queryset=OrderItem.objects.all(), many=False, write_only=True, required=False)
+    items_removed = serializers.PrimaryKeyRelatedField(queryset=OrderItem.objects.all(), many=True, write_only=True, required=False)
+    
     class Meta:
         model = Order
         fields = [
-            'id', 'customer', 'products', 'ordered_at',
-            'complete', 'shipping_address',
-            'payment_method', 'add_product', 'remove_products',
+            'id', 'customer', 'order', 'ordered_at',
+            'complete', 'shipping_address', 'payment_method',
+            'item', 'items_removed',
         ]
         read_only_fields = [
-            'id', 'products', 'ordered_at', 'complete', 
-            'payment_method', 'customer',
-            'add_product', 'remove_products',
+            'id', 'ordered_at', 'order', 'complete', 'payment_method', 
+            'customer', 'shipping_address',
         ]
+                
+    def validate_item(self, item):                    
+        if not OrderItem.objects.filter(id=item.id).exists():
+            raise serializers.ValidationError(_('The product %(id)s does not exist in the database') % {'id': item.id})
+        return item
 
-    def validate_add_product(self, product):                    
-        if not Product.objects.filter(id=product.id).exists():
-            raise serializers.ValidationError(_('The product does not exist in the database'))
-        return product
-
-    def validate_remove_products(self, products):        
-        for product in products:
-            if not Product.objects.filter(id=product.id).exists():
-                raise serializers.ValidationError(_('Product %(id)s does not exist in the database') % {'id': product.id})
-        return products
-
-    def create(self, validated_data):
-        add_product = validated_data.pop('add_product', None)
-        remove_products = validated_data.pop('remove_products', [])
-        order = super().create(validated_data)
+    def validate_items_removed(self, items):        
+        for item in items:
+            if not OrderItem.objects.filter(id=item.id).exists():
+                raise serializers.ValidationError(_('The product %(id)s does not exist in the database') % {'id': item.id})
+        return items
         
-        if add_product:
-            order.products.add(add_product)
-            
-        for product in remove_products:
-            order.products.remove(product)
-            
+    def create(self, validated_data):
+        item = validated_data.pop('item', None)
+        items_removed = validated_data.pop('items_removed', [])
+        
+        # Create the order instance without item and items_removed
+        order = super().create(validated_data)
+                
         return order
-
+    
     def update(self, instance, validated_data):
-        add_product = validated_data.pop('add_product', None)
-        remove_products = validated_data.pop('remove_products', [])
+        item = validated_data.pop('item', None)
+        items_removed = validated_data.pop('items_removed', [])
+        
         instance = super().update(instance, validated_data)
         
-        if add_product:
-            instance.products.add(add_product)
-            
-        for product in remove_products:
-            instance.products.remove(product)
+        if item:
+            instance.products.add(item)
+        
+        if items_removed:  
+            for item in items_removed:
+                instance.products.remove(item)
             
         return instance

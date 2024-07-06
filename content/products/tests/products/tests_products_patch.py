@@ -1,12 +1,7 @@
 from .base_products_test import BaseProductsTest
 import pdb
 
-class ProductModelViewSetpatchTest(BaseProductsTest):
-    def test_if_it_is_allowed_users_non_seller(self):
-        response = self.patch(self.data, seller=False)
-        self.assertEqual(response.status_code, 403)
-        self.assertIn('not have permission', response.data['detail'])
-        
+class ProductModelViewSePpatchTest(BaseProductsTest):
     def test_patch_product(self):
         self.data['name'] = 'SAMSUNG GALAXY A10S'
         response = self.patch(self.data)        

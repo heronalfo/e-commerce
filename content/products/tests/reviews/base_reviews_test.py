@@ -1,25 +1,15 @@
 from django.urls import reverse
 from rest_framework.test import APIClient
-from accounts.tests.base_accounts_test import BaseAccountsTest
+from products.tests.products.base_products_test import BaseProductsTest
 from products.models import Product, Category
 import pdb
 
-class BaseReviewsTest(BaseAccountsTest):
+class BaseReviewsTest(BaseProductsTest):
     def setUp(self):    
         super().setUp()
-        self.client_not_authenticate = APIClient()
                 
-        self.category = Category.objects.create(name='SmartPhone', description='cell phone model')  
         self.api_url = reverse('products:reviews-list')
-        self.product = Product.objects.create(
-            seller=self.user,
-            name='Galaxy A10S',
-            description='SAMSUNG Galaxy A10S 32G 2RAM',
-            category=self.category,
-            price=899.99,
-            brand='SAMSUNG',
-            stock=9,          
-        )
+        self.product = self.create_product()
         
         self.data = {
            'product_id': self.product.id,
@@ -31,9 +21,7 @@ class BaseReviewsTest(BaseAccountsTest):
         if authenticate:
             return self.client.post(self.api_url, data, format='json')
         
-        return self.client_not_authenticate.post(self.api_url, data, format='json')
-
-
+        return self.unauthorized_client.post(self.api_url, data, format='json')
         
     def patch(self, data=None, authenticate=True):
         payload = {      
@@ -48,6 +36,6 @@ class BaseReviewsTest(BaseAccountsTest):
         if authenticate:       
             return self.client.patch(api_url, data, format='json')
             
-        return self.client_not_authenticate.patch(api_url, data, format='json')
+        return self.unauthorized_client.patch(api_url, data, format='json')
 
         
