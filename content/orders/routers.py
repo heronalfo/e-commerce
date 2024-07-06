@@ -1,0 +1,11 @@
+from django.urls import path
+from rest_framework.routers import SimpleRouter
+from .viewsets import *
+
+app_name = 'orders'
+
+router = SimpleRouter()
+router.register('order_item/api/v1', OrderItemModelViewSet, basename='orders-itens')
+router.register('orders/api/v1', OrderModelViewSet, basename='orders')
+
+urlpatterns = router.urls

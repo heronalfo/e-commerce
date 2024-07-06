@@ -11,4 +11,5 @@ INSTALLED_APPS = [
     'rest_framework', #DJANGO REST FRAMEWORK
     'accounts', #APP
     'products', #APP
+    'orders', #APP
 ]

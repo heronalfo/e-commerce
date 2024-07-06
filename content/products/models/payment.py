@@ -1,6 +1,6 @@
 from accounts.models import Costumer
 from django.db import models
-from .order import Order
+from orders.models import Order
 
 class Payment(models.Model):
     '''

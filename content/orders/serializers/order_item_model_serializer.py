@@ -1,6 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
-from ..models import OrderItem, Order, Product
+from products.models import Product
+from ..models import OrderItem, Order
 
 class OrderItemModelSerializer(serializers.ModelSerializer):
     class Meta:
