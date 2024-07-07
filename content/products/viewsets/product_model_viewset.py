@@ -1,13 +1,25 @@
+"""
+product_model_viewset.py
+
+This module is responsible for creating a model viewset for adding, editing, deleting, and others.
+
+for more informations: https://www.django-rest-framework.org/api-guide/viewsets/
+
+Class:
+    ProsuctModelViewSet: This class is responsible for creating a new viewset.
+
+Author:
+    Pypeu (heronalfo)
+"""
+
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
-from rest_framework.permissions import IsAuthenticated
 
 from rest_framework_xml.renderers import XMLRenderer
 from rest_framework_xml.parsers import XMLParser
 
-from rest_framework_xml.renderers import XMLRenderer
 from drf_yasg.utils import swagger_auto_schema
 
 from ..serializers import ProductModelSerializer
@@ -15,8 +27,11 @@ from ..models import Product
 from ..permissions import IsSeller
 
 class ProductModelViewSet(ModelViewSet):
+    '''
+    Model ViewSet for creating, deleting, editing and listing products.
+    '''
     serializer_class = ProductModelSerializer
-    queryset = Product.objects.all()
+    queryset = Product.objects.all() #pylint: disable=no-member
     parser_classes = [JSONParser, XMLParser]
     renderer_classes = [JSONRenderer, XMLRenderer]
     http_method_names = ['get', 'post', 'delete', 'patch', 'head', 'options']
@@ -38,12 +53,13 @@ class ProductModelViewSet(ModelViewSet):
 
     def get_permissions(self):
         '''
-        Apply permissions to objects, allowing only the account owner to edit or delete their products.
+        Apply permissions to objects allowing only 
+        the account owner to edit or delete their products.
         '''
         if self.action in ['create', 'delete', 'partial_update']:
             return [IsSeller()]
         return super().get_permissions()
-        
+
     @swagger_auto_schema(
         operation_description='Create a new product. Only sellers can create products.',
         responses={

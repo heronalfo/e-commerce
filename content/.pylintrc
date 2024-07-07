@@ -1,0 +1,8 @@
+[MASTER]
+ignore = venv, migrations, tests
+
+[CONTROL MESSAGES]
+disable= too-many-ancestors, 
+         invalid-str-returned, 
+         too-few-public-methods,
+         no-member,

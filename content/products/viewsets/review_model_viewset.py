@@ -1,3 +1,17 @@
+"""
+review_model_viewset.py
+
+This module is responsible for creating a model viewset for adding, editing, deleting, and others.
+
+for more informations: https://www.django-rest-framework.org/api-guide/viewsets/
+
+Class:
+    CategoryModelViewSet: This class is responsible for creating a new viewset.
+
+Author:
+    Pypeu (heronalfo)
+"""
+
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from .product_model_viewset import ProductModelViewSet
@@ -6,22 +20,25 @@ from ..serializers import ReviewModelSerializer
 from ..permissions import IsOwner
 
 class ReviewModelViewSet(ProductModelViewSet):
-    queryset = Review.objects.all()
+    '''
+    Model View Set for registering, deleting, editing and listing reviews.
+    '''
+    queryset = Review.objects.all() #pylint: disable=no-member
     serializer_class = ReviewModelSerializer
-    
+
     def perform_create(self, serializer):
         serializer.save(customer=self.request.user)
         return super().perform_create(serializer)
-    
+
     def get_permissions(self):
         if self.action == 'create':
             return [IsAuthenticated(), ]
-        
+
         if self.action in ['destroy', 'update']:
             return [IsOwner(), ]
-        
+
         return super().get_permissions()
-            
+
     @swagger_auto_schema(
         operation_description='Create a new review. Only costumers and sellers can create reviews.',
         responses={
@@ -56,3 +73,4 @@ class ReviewModelViewSet(ProductModelViewSet):
     )
     def partial_update(self, *args, **kwargs):
         return super().partial_update(*args, **kwargs)
+        

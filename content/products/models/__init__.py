@@ -1,3 +1,7 @@
+'''
+Packaging and modularization of models
+'''
+
 from .category import *
 from .shipping import *
 from .product import *
