@@ -52,7 +52,7 @@ class Review(models.Model):
     rating = models.IntegerField()
     comment = models.CharField(max_length=150, blank=True, db_index=True)
     commented_at = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         '''
         Review instance metadata.

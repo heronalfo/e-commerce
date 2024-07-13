@@ -1,13 +1,19 @@
 from .base_dir import BASE_DIR
-from env import DATABASE_NAME
+from env import DJANGO
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+DATABASE = DJANGO['DATABASE']
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': DATABASE['ENGINE'],
         
-        'NAME': BASE_DIR / DATABASE_NAME,
+        'NAME': DATABASE['NAME'],
+        'USER': DATABASE['USER'],
+        'PASSWORD': DATABASE['PASSWORD'],
+        'HOST': DATABASE['HOST'],
+        'PORT': DATABASE['PORT'],
 
     }
 }

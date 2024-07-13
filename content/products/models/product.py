@@ -20,7 +20,6 @@ Author:
 
 from django.db import models
 from accounts.models import Costumer
-from .category import Category
 
 class ProductManager(models.Manager):
     '''
@@ -31,7 +30,7 @@ class ProductManager(models.Manager):
         '''
         Override the default queryset to prefetch related fields.
         '''
-        return super().get_queryset().prefetch_related('category', 'accounts.costumer')
+        return super().get_queryset().prefetch_related('category', 'tag')
 
     def with_related(self):
         '''
@@ -56,7 +55,8 @@ class Product(models.Model):
     seller = models.ForeignKey(Costumer, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(max_length=64, db_index=True)
     description = models.TextField(max_length=5000)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, related_name='products')
+    category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, related_name='products')
+    tags = models.ManyToManyField('Tag', related_name='tags')
     price = models.DecimalField(max_digits=10, decimal_places=2, db_index=True)
     brand = models.CharField(max_length=64, blank=True, null=True)
     stock = models.PositiveIntegerField()

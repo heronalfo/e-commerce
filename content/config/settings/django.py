@@ -1,5 +1,6 @@
-from env import DEBUG
-from env import ALLOWED_HOSTS
+DEBUG = True
+
+ALLOWED_HOSTS = []
 
 ROOT_URLCONF = 'config.urls'
 

@@ -2,8 +2,7 @@
 Packaging and modularization of models
 '''
 
-from .category import *
-from .shipping import *
-from .product import *
-from .payment import *
-from .review import *
+from .category import Category
+from .product import Product
+from .review import Review
+from .tag import Tag
