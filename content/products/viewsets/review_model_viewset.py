@@ -15,9 +15,10 @@ Author:
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from .product_model_viewset import ProductModelViewSet
-from ..models import Review
 from ..serializers import ReviewModelSerializer
+from ..filters import ReviewFilters
 from ..permissions import IsOwner
+from ..models import Review
 
 class ReviewModelViewSet(ProductModelViewSet):
     '''
@@ -25,7 +26,8 @@ class ReviewModelViewSet(ProductModelViewSet):
     '''
     queryset = Review.objects.all() #pylint: disable=no-member
     serializer_class = ReviewModelSerializer
-
+    filterset_class = ReviewFilters
+    
     def perform_create(self, serializer):
         serializer.save(customer=self.request.user)
         return super().perform_create(serializer)

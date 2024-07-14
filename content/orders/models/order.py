@@ -21,7 +21,14 @@ class Order(models.Model):
     Registration of orders available for order, name, category, price, and other details.
     '''
 
-    customer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
+    class Meta:
+        '''
+        Order instance metadata.
+        '''
+        verbose_name = 'order'
+        verbose_name_plural = 'orders'
+
+    costumer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
     products = models.ManyToManyField('OrderItem', related_name='orders')
     ordered_at = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, db_index=True)

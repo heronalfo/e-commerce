@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework.test import APIClient
 from accounts.tests.base_accounts_test import BaseAccountsTest
-from products.models import Costumer
+from accounts.models import Costumer
 import pdb
 
 class BaseCategoriesTest(BaseAccountsTest):

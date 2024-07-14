@@ -10,8 +10,6 @@ Routers:
     Products:
         http://127.0.0.1:8000/products/api/v1/
         http://127.0.0.1:8000/products/api/v1/<pk:int>
-        http://127.0.0.1:8000/products/api/v1/search/
-
     Reviews:
         http://127.0.0.1:8000/products/reviews/api/v1/
         http://127.0.0.1:8000/products/reviews/api/v1/<pk:int>
@@ -27,7 +25,7 @@ Author:
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 from .viewsets import (CategoryModelViewSet, ReviewModelViewSet,
-ProductModelViewSet, TagModelViewSet, SearchView)
+ProductModelViewSet, TagModelViewSet)
 
 #pylint: disable=invalid-name
 app_name = 'products'
@@ -39,6 +37,4 @@ router.register('api/v1', ProductModelViewSet, basename='products')
 router.register('tags/api/v1', TagModelViewSet, basename='tags')
 
 urlpatterns = [
-    path('api/v1/search/', SearchView.as_view(), name='search'),
-
 ] + router.urls

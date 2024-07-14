@@ -23,7 +23,8 @@ class OrderItemModelViewSet(OrderModelViewSet):
     '''
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemModelSerializer
-
+    http_method_names = ['post', 'delete', 'patch', 'head', 'options']
+    
     def perform_update(self, serializer):
         serializer.save()
 

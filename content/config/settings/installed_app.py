@@ -6,7 +6,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework_simplejwt',
+    'django_filters', #FILTERS
+    'rest_framework_simplejwt', # SIMPLE JWT
     'drf_yasg', #SWAGGER
     'rest_framework', #DJANGO REST FRAMEWORK
     'accounts', #APP

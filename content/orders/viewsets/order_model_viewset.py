@@ -37,20 +37,30 @@ class OrderModelViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         """
-        Salva a instância de pedido após a criação, associando ao cliente atual.
+        Saves the order instance after creation, associating it with the current customer. 
         """
-        serializer.save(customer=self.request.user)
+        serializer.save(costumer=self.request.user)
         return super().perform_create(serializer)
 
     def get_permissions(self):
         """
-        Define as permissões com base na ação solicitada.
+        Sets permissions based on the requested action.
         """
         if self.action == 'create':
             return [IsAuthenticated(),]
+
         if self.action in ['list', 'destroy', 'partial_update']:
             return [IsAuthenticated(), IsOwner()]
+
         return super().get_permissions()
+
+    def get_queryset(self):
+        '''
+        Overrides the function so that only the owner sees their own orders.
+        '''
+        queryset = super().get_queryset().filter(costumer=self.request.user)
+        
+        return queryset
 
     @swagger_auto_schema(
         operation_description='Create a new order. Only authenticated users can create orders.',

@@ -23,7 +23,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey('products.product', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
-     #pylint: disable=invalid-str-returned
+    #pylint: disable=invalid-str-returned
     def __str__(self):
         '''
         Instance Formatting 

@@ -2,5 +2,6 @@
 Packaging of orders features.
 '''
 
-from .order import *
-from .order_item import *
+from .order import Order
+from .order_item import OrderItem
+from .wishlist import Wishlist

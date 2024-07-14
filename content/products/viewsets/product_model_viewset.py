@@ -24,6 +24,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 from ..serializers import ProductModelSerializer
 from ..models import Product
+from ..filters import ProductFilters
 from ..permissions import IsSeller
 
 class ProductModelViewSet(ModelViewSet):
@@ -31,6 +32,7 @@ class ProductModelViewSet(ModelViewSet):
     Model ViewSet for creating, deleting, editing and listing products.
     '''
     serializer_class = ProductModelSerializer
+    filterset_class = ProductFilters
     queryset = Product.objects.all() #pylint: disable=no-member
     parser_classes = [JSONParser, XMLParser]
     renderer_classes = [JSONRenderer, XMLRenderer]
@@ -49,6 +51,7 @@ class ProductModelViewSet(ModelViewSet):
         '''
         obj = get_object_or_404(self.get_queryset(), id=self.kwargs.get('pk'))
         self.check_object_permissions(self.request, obj)
+
         return obj
 
     def get_permissions(self):
@@ -57,7 +60,8 @@ class ProductModelViewSet(ModelViewSet):
         the account owner to edit or delete their products.
         '''
         if self.action in ['create', 'delete', 'partial_update']:
-            return [IsSeller()]
+            return [IsSeller(), ]
+
         return super().get_permissions()
 
     @swagger_auto_schema(
