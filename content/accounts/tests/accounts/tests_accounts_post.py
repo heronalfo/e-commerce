@@ -30,12 +30,7 @@ class AccountsUserPostTest(BaseAccountsTest):
         self.data['password'] = 'aaa'
         response = self.post(self.data)
         self.assertEqual(response.status_code, 400)
-        
-    def test_if_not_is_allowed_cep_invalid(self):
-        self.data['cep'] = '1 01 zjskakq e / Y -01'
-        response = self.post(self.data)
-        self.assertEqual(response.status_code, 400)
-        
+
     def test_if_not_is_allowed_cpf_invalid(self):
         self.data['cpf'] = '123 / £ .456.78 k a 9-01'
         response = self.post(self.data)

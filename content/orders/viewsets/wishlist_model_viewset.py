@@ -23,7 +23,7 @@ class WishlistModelViewSet(OrderModelViewSet):
     '''
     queryset = Wishlist.objects.all()
     serializer_class = WishlistModelSerializer
-    http_method_names = ['post', 'delete', 'patch', 'head', 'options']
+    http_method_names = ['post', 'delete', 'head', 'options']
     
     def perform_update(self, serializer):
         serializer.save()

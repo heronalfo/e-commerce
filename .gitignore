@@ -9,6 +9,14 @@ media/
 
 env.py
 
+# Django
+
+migrations/
+
+# Sh Files
+
+mysql.sh
+
 # Tests Coverage
 
 htmlcov/

@@ -14,10 +14,11 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
 from accounts.models import Costumer
 from orders.models import Order
 
-class Shipping(models.Model):
+class Shipping(Extension):
     '''
     Registration of shipping available for sale, order, costumer, address, and other details.
     '''

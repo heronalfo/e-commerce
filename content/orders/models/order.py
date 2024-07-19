@@ -14,9 +14,10 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
 from accounts.models import Costumer
 
-class Order(models.Model):
+class Order(Extension):
     '''
     Registration of orders available for order, name, category, price, and other details.
     '''
@@ -30,7 +31,6 @@ class Order(models.Model):
 
     costumer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
     products = models.ManyToManyField('OrderItem', related_name='orders')
-    ordered_at = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, db_index=True)
     shipping_address = models.CharField(max_length=255, null=True, blank=True)
     payment_method = models.CharField(max_length=100, null=True, blank=True)

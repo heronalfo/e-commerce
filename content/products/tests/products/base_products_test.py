@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
-from accounts.tests.base_accounts_test import BaseAccountsTest
+from accounts.tests.accounts.base_accounts_test import BaseAccountsTest
 from accounts.models import Costumer
 from products.models import Category, Product
 import pdb

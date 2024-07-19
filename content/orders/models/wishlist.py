@@ -14,8 +14,11 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
+from accounts.models import Costumer
+from products.models import Product
 
-class Wishlist(models.Model):
+class Wishlist(Extension):
     '''
     This class is responsible for adding products to the wishlist.
     '''
@@ -23,13 +26,11 @@ class Wishlist(models.Model):
         '''
         Wishlist instance metadata.
         '''
-        ordering = ['-added_at']
         verbose_name = 'wishlist'
         verbose_name_plural = 'wishlists'
 
-    costumer = models.ForeignKey('accounts.costumer', on_delete=models.CASCADE, related_name='costumer')
-    product = models.ForeignKey('products.product', on_delete=models.CASCADE, related_name='product')
-    added_at = models.DateTimeField(auto_now_add=True)
+    costumer = models.ForeignKey(Costumer, on_delete=models.CASCADE, related_name='wishlist')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='wishlist')
 
     def __str__(self):
         '''

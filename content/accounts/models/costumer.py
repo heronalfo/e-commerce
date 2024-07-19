@@ -1,5 +1,5 @@
 '''
-product.py
+costumer.py
 
 This module is responsible for modeling and creating a Model Instance in the database,
 through ORM Django.
@@ -11,7 +11,7 @@ Classes:
         for more informations: https://docs.djangoproject.com/en/5.0/topics/db/managers/
     
     Costumer: This abstract class is responsible for modeling
-    a new Product Instance in the database.
+    a new Costumer Instance in the database.
 
 Author:
     PyPeu (heronalfo)
@@ -19,6 +19,7 @@ Author:
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from core.models import Extension
 
 #pylint: disable=line-too-long
 class Costumer(AbstractUser):
@@ -27,7 +28,7 @@ class Costumer(AbstractUser):
     '''
     class Meta:
         '''
-        Product instance metadata.
+        Costumer instance metadata.
         '''
         verbose_name = 'costumer'
         verbose_name_plural = 'costumers'
@@ -35,10 +36,7 @@ class Costumer(AbstractUser):
     name = models.CharField(max_length=32, null=True)
     about = models.CharField(max_length=324, null=True)
     cpf = models.CharField(max_length=15, unique=True, db_index=True, null=True)
-    cep = models.CharField(max_length=24, db_index=True, null=True)
     number = models.CharField(max_length=24, db_index=True, unique=True, null=True)
-    address = models.CharField(max_length=292, null=True)
-    cnpj = models.CharField(max_length=34, unique=True, null=True)
     is_seller = models.BooleanField(default=False)
 
     groups = models.ManyToManyField(

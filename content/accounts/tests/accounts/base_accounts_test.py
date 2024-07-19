@@ -4,9 +4,33 @@ from django.utils.translation import activate
 from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
-from ..models import Costumer
+from accounts.models import Costumer, Address
 
 class BaseAccountsTest(TestCase):
+    def create_address(
+        self,
+        street: str = 'Aristides Fransico dos Santos',
+        cep: str = '0000-000',
+        number: int = 27,
+        city: str = 'Euclides da Cunha',
+        uf: str = 'BA',
+        neighborhood: str = 'Dengo',
+        complement: str = 'Vizinho da rita do bolo e o omarinho do carro pipa'
+    ):
+
+        address = Address.objects.create(
+            street=street,
+            cep=cep,
+            number=number,
+            city=city,
+            uf=uf,
+            neighborhood=neighborhood,
+            complement=complement,
+            costumer=self.user
+        )
+
+        return address
+
     def setUp(self):    
         self.client = APIClient()
         
@@ -22,7 +46,7 @@ class BaseAccountsTest(TestCase):
         
         self.data = {      
           'username': 'client-test-other',
-          'password': 'AbC1234_',
+          'password': 'AbC1234_',          
         }
         
     @override_settings(LANGUAGE_CODE='pt')

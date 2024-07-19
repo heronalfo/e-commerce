@@ -14,10 +14,11 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
 from accounts.models import Costumer
 from orders.models import Order
 
-class Payment(models.Model):
+class Payment(Extension):
     '''
     This model is responsible for creating a new instance in the database, 
     storing data such as: customer, order, amount, payment_method.
@@ -31,7 +32,6 @@ class Payment(models.Model):
 
     customer = models.ForeignKey(Costumer, on_delete=models.CASCADE, related_name='payment')
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    payment_date = models.DateTimeField(auto_now_add=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_method = models.CharField(choices=PAYMENT_CHOICE, max_length=32, blank=True)
     transaction_id = models.AutoField(primary_key=True)
@@ -41,7 +41,7 @@ class Payment(models.Model):
         Category instance metadata.
         '''
 
-        ordering = ['-payment_date']
+        ordering = ['-created_at']
         verbose_name = 'payment'
         verbose_name_plural = 'payments'
 

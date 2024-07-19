@@ -28,8 +28,11 @@ class WishlistModelSerializer(serializers.ModelSerializer):
         '''
 
         model = Wishlist
-        fields = ['id', 'product', 'costumer',]
-        read_only_fields = ['id', 'costumer',]
+        fields = ['id', 'product', 'costumer', 
+        'created_at', 'uuid', 'updated_at', ]
+
+        read_only_fields = ['id', 'costumer', 'created_at',
+         'uuid', 'updated_at', ]
 
     def validate_product(self, product):
         '''

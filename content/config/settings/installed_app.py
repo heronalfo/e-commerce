@@ -10,8 +10,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt', # SIMPLE JWT
     'drf_yasg', #SWAGGER
     'rest_framework', #DJANGO REST FRAMEWORK
+    'core', #APP
     'accounts', #APP
     'products', #APP
     'orders', #APP
-    'payments', #APP
+    'payments',
 ]

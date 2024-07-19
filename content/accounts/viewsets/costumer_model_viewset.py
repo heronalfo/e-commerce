@@ -12,42 +12,21 @@ Author:
     Pypeu (heronalfo)
 """
 
-from django.shortcuts import get_object_or_404
-
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
-from rest_framework_xml.parsers import XMLParser
-from rest_framework_xml.renderers import XMLRenderer
-
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import CostumerSerializer
-from .models import Costumer
-from .permissions import IsOwnerOfUser
+from core.viewsets import BaseModelViewSet
+from ..serializers import CostumerModelSerializer
+from ..models import Costumer, Address
+from ..permissions import IsOwnerOfUser
 
-class CostumerModelViewSet(ModelViewSet):
+class CostumerModelViewSet(BaseModelViewSet):
     '''
     Viewset for creating, updating and editing the user to obtain their access token
     '''
-    serializer_class = CostumerSerializer
+    serializer_class = CostumerModelSerializer
     queryset = Costumer.objects.all()
-    parser_classes = [JSONParser,  XMLParser]
-    renderer_classes = [JSONRenderer, XMLRenderer]
     http_method_names = ['post', 'delete', 'patch', 'head', 'options']
-
-    def get_object(self):
-        '''
-        Get the object (user) and apply the appropriate permissions        
-        :returns: 
-
-         User.objects whether the object was found
-         404 Not found if the object was not found         
-        '''
-        obj = get_object_or_404(self.get_queryset(), id=self.kwargs.get('pk'))
-        self.check_object_permissions(self.request, obj)
-
-        return obj
 
     def get_permissions(self):
         '''

@@ -1,5 +1,5 @@
 '''
-admin.py
+costumer_model_admin.py
 
 This module offers a panel for managing products
 
@@ -9,8 +9,8 @@ Author:
     PyPeu (heronalfo)
 '''
 
-from .models import Costumer
 from django.contrib import admin
+from ..models import Costumer
 
 @admin.register(Costumer)
 class CostumerAdmin(admin.ModelAdmin):

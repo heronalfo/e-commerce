@@ -17,3 +17,9 @@ class AccountsConfig(AppConfig):
     '''
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'accounts'
+    
+    def ready(self):
+        '''
+        Cadastro dos sinais para a criação de um endereço após a criação de um usuário.
+        '''
+        import accounts.signals

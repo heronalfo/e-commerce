@@ -13,3 +13,13 @@ DJANGO = {
     }
     
 }
+
+#Email: main method for sending emails
+EMAIL = {
+    'SELLERS': [
+        {
+          'USER': 'email',
+          'PASSWORD': 'token',
+        },
+    ]   
+}

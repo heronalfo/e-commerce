@@ -13,26 +13,20 @@ Author:
 """
 
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
 from rest_framework.permissions import IsAuthenticated
 
-from rest_framework_xml.renderers import XMLRenderer
-from rest_framework_xml.parsers import XMLParser
-
 from drf_yasg.utils import swagger_auto_schema
+from core.viewsets import BaseModelViewSet
 from products.permissions import IsOwner
 from ..serializers import OrderModelSerializer
 from ..models import Order
 
-class OrderModelViewSet(ModelViewSet):
+class OrderModelViewSet(BaseModelViewSet):
     '''
     This class is responsible for operating CRUD functionalities
     '''
     queryset = Order.objects.all() #pylint: disable=no-member
     serializer_class = OrderModelSerializer
-    parser_classes = [JSONParser, XMLParser]
-    renderer_classes = [JSONRenderer, XMLRenderer]
     http_method_names = ['get', 'post', 'delete', 'patch', 'head', 'options']
 
     def perform_create(self, serializer):

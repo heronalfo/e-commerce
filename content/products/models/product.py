@@ -19,6 +19,7 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
 from accounts.models import Costumer
 
 class ProductManager(models.Manager):
@@ -39,7 +40,7 @@ class ProductManager(models.Manager):
 
         return self.get_queryset()
 
-class Product(models.Model):
+class Product(Extension):
     '''
     Registration of products available for sale, name, category, price, and other details.
     '''
@@ -60,7 +61,6 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, db_index=True)
     brand = models.CharField(max_length=64, blank=True, null=True)
     stock = models.PositiveIntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         '''

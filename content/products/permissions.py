@@ -48,4 +48,4 @@ class IsOwner(BasePermission):
         Checks if the user is the instance creator
         '''
 
-        return obj.customer == request.user
+        return obj.costumer == request.user

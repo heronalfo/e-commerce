@@ -19,6 +19,7 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
 from accounts.models import Costumer
 from .product import Product
 
@@ -41,7 +42,7 @@ class ReviewManager(models.Manager):
 
         return self.get_queryset()
 
-class Review(models.Model):
+class Review(Extension):
     '''
     This model is responsible for creating a new instance in the database, 
     storing data such as: customer, rating, comment.
@@ -51,13 +52,12 @@ class Review(models.Model):
     customer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
     rating = models.IntegerField()
     comment = models.CharField(max_length=150, blank=True, db_index=True)
-    commented_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         '''
         Review instance metadata.
         '''
-        ordering = ['-commented_at']
+        ordering = ['-created_at']
         verbose_name = 'review'
         verbose_name_plural = 'reviews'
 

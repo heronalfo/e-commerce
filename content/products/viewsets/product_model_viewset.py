@@ -12,30 +12,23 @@ Author:
     Pypeu (heronalfo)
 """
 
-from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
-
-from rest_framework_xml.renderers import XMLRenderer
-from rest_framework_xml.parsers import XMLParser
 
 from drf_yasg.utils import swagger_auto_schema
 
+from core.viewsets import BaseModelViewSet
 from ..serializers import ProductModelSerializer
 from ..models import Product
 from ..filters import ProductFilters
 from ..permissions import IsSeller
 
-class ProductModelViewSet(ModelViewSet):
+class ProductModelViewSet(BaseModelViewSet):
     '''
     Model ViewSet for creating, deleting, editing and listing products.
     '''
     serializer_class = ProductModelSerializer
     filterset_class = ProductFilters
-    queryset = Product.objects.all() #pylint: disable=no-member
-    parser_classes = [JSONParser, XMLParser]
-    renderer_classes = [JSONRenderer, XMLRenderer]
+    queryset = Product.objects.all()
     http_method_names = ['get', 'post', 'delete', 'patch', 'head', 'options']
 
     def perform_create(self, serializer):
@@ -44,15 +37,6 @@ class ProductModelViewSet(ModelViewSet):
         '''
         serializer.save(seller=self.request.user)
         return super().perform_create(serializer)
-
-    def get_object(self):
-        '''
-        Retrieve the object (product) and apply appropriate permissions.
-        '''
-        obj = get_object_or_404(self.get_queryset(), id=self.kwargs.get('pk'))
-        self.check_object_permissions(self.request, obj)
-
-        return obj
 
     def get_permissions(self):
         '''

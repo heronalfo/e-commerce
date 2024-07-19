@@ -32,13 +32,13 @@ class OrderModelSerializer(serializers.ModelSerializer):
 
         model = Order
         fields = [
-            'id', 'customer', 'order', 'ordered_at',
+            'id', 'costumer', 'order', 'created_at',
             'complete', 'shipping_address', 'payment_method',
             'item', 'items_removed',
         ]
         read_only_fields = [
-            'id', 'ordered_at', 'order', 'complete', 'payment_method', 
-            'customer', 'shipping_address',
+            'id', 'created_at', 'order', 'complete', 'payment_method', 
+            'costumer', 'shipping_address',
         ]
 
     def validate_item(self, item):

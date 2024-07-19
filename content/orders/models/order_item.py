@@ -14,8 +14,9 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
 
-class OrderItem(models.Model):
+class OrderItem(Extension):
     '''
     Product added to shopping cart, quantity and price 
     '''

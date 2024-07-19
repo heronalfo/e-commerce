@@ -1,5 +1,5 @@
 '''
-serializers.py
+costumer_model_serializer.py
 
 This module is responsible for serializing and sanitizing the received data.
 for more informations: https://www.django-rest-framework.org/api-guide/serializers/
@@ -15,10 +15,10 @@ Author:
 import re
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Costumer
+from ..models import Costumer
 
 #pylint: disable=line-too-long
-class CostumerSerializer(serializers.ModelSerializer):
+class CostumerModelSerializer(serializers.ModelSerializer):
     '''
     Serializes and validates costumer information through the database.
     '''
@@ -29,12 +29,10 @@ class CostumerSerializer(serializers.ModelSerializer):
 
         model = Costumer
         fields = ['id', 'username', 'password',
-        'name', 'about', 'cpf', 'cep', 
-        'number', 'address', 'cnpj',
-        'name', 'about', 'number',
-        'address',]
+        'name', 'about', 'cpf', 
+        'number', ]
 
-        read_only_fields = ['id', ]
+        read_only_fields = ['id', 'address',]
 
     def validate_username(self, username):
         '''
@@ -72,22 +70,10 @@ class CostumerSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'message': 'The CPF sent does not comply with Brazilian standards. Example: 123.456.789.01'})
 
         return cpf
-
-    def validate_cep(self, cep):
-        '''
-        Checks if the zip code is in the Brazilian standard, otherwise it raises an exception.
-        '''
-
-        pattern = re.compile(r'^\d{5}-\d{3}$') #12345-678
-
-        if not re.match(pattern, cep):
-            raise serializers.ValidationError({'message': 'The CEP sent does not comply with Brazilian standards. Example: 12345-678'})
-
-        return cep
-
+    
     def validate_number(self, number):
         '''
-        Checks if the number is in the Brazilian standard     
+        Checks if the number is in the Brazilian standard.   
         '''
         pattern = re.compile(r'^\+\d{2} \(\d{2}\) \d{4,5} \d{4}$') #+55 (11) 9 1234 5678
 

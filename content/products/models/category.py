@@ -15,8 +15,9 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
 
-class Category(models.Model):
+class Category(Extension):
     '''
     Registration of categories available for name, description, other details.
     '''

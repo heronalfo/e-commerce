@@ -15,8 +15,9 @@ Author:
 '''
 
 from django.db import models
+from core.models import Extension
 
-class Tag(models.Model):
+class Tag(Extension):
     '''
     This class is responsible for creating new tags to improve product searches.
     '''

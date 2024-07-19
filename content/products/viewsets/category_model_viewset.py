@@ -55,7 +55,7 @@ class CategoryModelViewSet(ProductModelViewSet):
     )
     def destroy(self, *args, **kwargs):
         return super().destroy(*args, **kwargs)
-
+        
     @swagger_auto_schema(
         operation_description='Update a category. Only customers can edit categories.',
         responses={

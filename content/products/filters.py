@@ -43,5 +43,5 @@ class ReviewFilters(filters.FilterSet):
         model = Review
         fields = {
             'comment': ['exact', 'icontains'],
-            'commented_at': ['gte', 'lte'],
+            'created_at': ['gte', 'lte'],
         }
