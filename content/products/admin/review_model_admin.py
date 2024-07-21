@@ -14,4 +14,7 @@ from ..models import Review
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
+    '''
+    Registers a new panel for manipulating this table.
+    '''
     ...

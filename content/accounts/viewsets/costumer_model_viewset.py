@@ -16,9 +16,9 @@ from rest_framework.viewsets import ModelViewSet
 from drf_yasg.utils import swagger_auto_schema
 
 from core.viewsets import BaseModelViewSet
+from core.permissions import IsOwnerOfUser
 from ..serializers import CostumerModelSerializer
 from ..models import Costumer, Address
-from ..permissions import IsOwnerOfUser
 
 class CostumerModelViewSet(BaseModelViewSet):
     '''

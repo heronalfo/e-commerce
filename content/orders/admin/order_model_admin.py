@@ -14,4 +14,7 @@ from django.contrib import admin
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    '''
+    Registers a new panel for manipulating this table.
+    '''
     ...

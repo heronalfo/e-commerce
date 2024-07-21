@@ -30,9 +30,11 @@ class CostumerModelSerializer(serializers.ModelSerializer):
         model = Costumer
         fields = ['id', 'username', 'password',
         'name', 'about', 'cpf', 
-        'number', ]
+        'number', 'created_at', 
+        'updated_at', ]
 
-        read_only_fields = ['id', 'address',]
+        read_only_fields = ['id', 'address', 'created_at', 
+        'updated_at', ]
 
     def validate_username(self, username):
         '''

@@ -15,7 +15,7 @@ class ReviewModelViewSetPatch(BaseReviewsTest):
         self.assertEqual(response.status_code, 400)
         
     def test_if_it_is_allowed_to_patch_comment_on_a_product_that_does_not_exist(self):
-        self.data['product_id'] = 12018*24      
+        self.data['product'] = 12018*24      
         response = self.patch(self.data)
                 
         self.assertEqual(response.status_code, 400)

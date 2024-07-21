@@ -17,6 +17,7 @@ Author:
     PyPeu (heronalfo)
 '''
 
+import uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from core.models import Extension
@@ -33,12 +34,15 @@ class Costumer(AbstractUser):
         verbose_name = 'costumer'
         verbose_name_plural = 'costumers'
 
+    #uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=32, null=True)
     about = models.CharField(max_length=324, null=True)
     cpf = models.CharField(max_length=15, unique=True, db_index=True, null=True)
     number = models.CharField(max_length=24, db_index=True, unique=True, null=True)
     is_seller = models.BooleanField(default=False)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='custom_user_set',

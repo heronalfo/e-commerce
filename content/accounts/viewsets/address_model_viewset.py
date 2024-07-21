@@ -15,7 +15,7 @@ Author:
 from drf_yasg.utils import swagger_auto_schema
 
 from core.viewsets import BaseModelViewSet
-from products.permissions import IsOwner
+from core.permissions import IsOwner
 from ..serializers import CostumerModelSerializer
 from ..models import Costumer, Address
 

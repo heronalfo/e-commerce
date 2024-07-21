@@ -1,5 +1,4 @@
 from .base_orders_test import BaseOrdersTest
-import pdb
 
 class OrderModelViewSetPatchTest(BaseOrdersTest):    
     def test_patch_order(self):

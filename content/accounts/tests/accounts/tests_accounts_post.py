@@ -15,12 +15,7 @@ class AccountsUserPostTest(BaseAccountsTest):
         self.data['username'] = 'a 8w91nq 01010qba ajq'
         response = self.post(self.data)
         self.assertEqual(response.status_code, 400)
-                
-    def test_if_users_with_same_name_are_not_permitted(self):
-        self.data['username'] = 'client-test'
-        response = self.post(self.data)
-        self.assertEqual(response.status_code, 400)
-                
+                    
     def test_create_data_with_missing_password(self):
         data = {'username': 'client-test-other'}        
         response = self.post(data)

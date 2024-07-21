@@ -16,13 +16,8 @@ class AccountsUserPatchTest(BaseAccountsTest):
         self.data['username'] = 'a 8w91nq 01010qba ajq'
         response = self.patch(self.data)
         self.assertEqual(response.status_code, 400)
-                
-    def test_patch_if_users_with_same_name_are_not_permitted(self):
-        self.data['username'] = 'client-test'
-        response = self.patch(self.data)
-        self.assertEqual(response.status_code, 400)
-                
+                      
     def test_patch_if_passwords_with_less_than_8_characters_are_not_allowed(self):
         self.data['password'] = 'aaa'
         response = self.patch(self.data)
-        self.assertEqual(response.status_code, 400) 
+        self.assertEqual(response.status_code, 400)

@@ -14,4 +14,7 @@ from ..models import Tag
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    '''
+    Registers a new panel for manipulating this table.
+    '''
     ...

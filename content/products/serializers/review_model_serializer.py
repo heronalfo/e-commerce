@@ -33,7 +33,9 @@ class ReviewModelSerializer(serializers.ModelSerializer):
         '''
         model = Review
         fields = '__all__'
-        read_only_fields = ['id', 'customer', 'commented_at']
+
+        read_only_fields = ['id', 'costumer', 'uuid',
+        'created_at', 'updated_at', ]
 
     def validate_rating(self, rating):
         '''

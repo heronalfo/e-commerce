@@ -13,13 +13,13 @@ from django.apps import AppConfig
 
 class AccountsConfig(AppConfig):
     '''
-    Launches a new application
+    Launches a new application.
     '''
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'accounts'
     
     def ready(self):
         '''
-        Cadastro dos sinais para a criação de um endereço após a criação de um usuário.
+        Registration of signals for creating an address after creating a user.
         '''
-        import accounts.signals
+        #import accounts.signals

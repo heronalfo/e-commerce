@@ -14,10 +14,12 @@ Author:
 
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
+
+from core.permissions import IsOwner
+
 from .product_model_viewset import ProductModelViewSet
 from ..serializers import ReviewModelSerializer
 from ..filters import ReviewFilters
-from ..permissions import IsOwner
 from ..models import Review
 
 class ReviewModelViewSet(ProductModelViewSet):
@@ -29,7 +31,7 @@ class ReviewModelViewSet(ProductModelViewSet):
     filterset_class = ReviewFilters
     
     def perform_create(self, serializer):
-        serializer.save(customer=self.request.user)
+        serializer.save(costumer=self.request.user)
         return super().perform_create(serializer)
 
     def get_permissions(self):

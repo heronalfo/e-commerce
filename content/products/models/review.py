@@ -48,8 +48,8 @@ class Review(Extension):
     storing data such as: customer, rating, comment.
     '''
 
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='review')
-    customer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='review')
+    costumer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
     rating = models.IntegerField()
     comment = models.CharField(max_length=150, blank=True, db_index=True)
 

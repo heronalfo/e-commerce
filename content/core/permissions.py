@@ -28,14 +28,12 @@ class IsSeller(BasePermission):
         '''
         Checks if the class user is a seller
         '''
-
         return not request.user.is_anonymous and request.user.is_seller
 
     def has_permission(self, request, view):
         '''
         Checks if the class user is a seller
         '''
-
         return not request.user.is_anonymous and request.user.is_seller
 
 class IsOwner(BasePermission):
@@ -47,5 +45,14 @@ class IsOwner(BasePermission):
         '''
         Checks if the user is the instance creator
         '''
-
         return obj.costumer == request.user
+
+class IsOwnerOfUser(BasePermission):
+    ''' 
+    Verification to see if the person making the request is the account owner.
+    '''
+    def has_object_permission(self, request, view, obj):
+        '''
+        Checks if the object's username is the client's username 
+        '''
+        return obj.username is request.user.username

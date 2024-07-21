@@ -1,43 +1,13 @@
 from django.urls import reverse
-from rest_framework.test import APIClient
-from products.tests.products.base_products_test import BaseProductsTest
-from products.models import Product, Category
-from orders.models import OrderItem
-import pdb
+from core.tests import UniversalBaseTests
 
-class BaseOrdersTest(BaseProductsTest):
-
-    def create_item(self, product=None, quantity: int = 12):     
-        item = OrderItem.objects.create(
-            product=self.create_product(),
-            quantity=quantity
-        )
-        
-        return item
-        
+class BaseOrdersTest(UniversalBaseTests):
     def setUp(self):
         super().setUp()
-        
-        self.data = {}
-        self.api_url = reverse('orders:orders-list')
-                
+        self.client = self.create_client(is_seller=True)
         self.item = self.create_item()
-                                     
-        self.products = [self.item, ] 
-                     
-    def post(self, data=None, authenticate=True):
-        if authenticate:
-            return self.client.post(self.api_url, self.data, format='json')
-        
-        return self.unauthorized_client.post(self.api_url, self.data, format='json')
-    
-    def patch(self, data=None, authenticate=True):
-          
-        self.response = self.post({})        
-        api_url = reverse('orders:orders-detail', kwargs={'pk': int(self.response.data['id'])})
-                        
-        if authenticate:
-            return self.client.patch(api_url, self.data, format='json')
-        
-        return self.unauthorized_client.patch(api_url, self.data, format='json')
-        
+        self.order = self.create_order()
+        self.api_url = reverse('orders:orders-list')
+        self.api_url_detail = reverse('orders:orders-detail', kwargs={'pk': self.order.id})          
+        self.data = {}
+        self.payload = self.data.copy()

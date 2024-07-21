@@ -30,9 +30,11 @@ class AddressModelSerializer(serializers.ModelSerializer):
         model = Address
         fields = ['id', 'costumer', 'road',
         'cep', 'number', 'complement', 
-        'neighborhood', 'uf', 'city', ]
+        'neighborhood', 'uf', 'city',
+        'uuid', 'created_at', 'updated_at', ]
 
-        read_only_fields = ['id', 'costumer']
+        read_only_fields = ['id', 'costumer' 'uuid',
+        'created_at', 'updated_at']
         
     def validate_cep(self, cep):
         '''

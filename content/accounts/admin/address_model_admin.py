@@ -14,4 +14,7 @@ from ..models import Address
 
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
+    '''
+    Registers a new panel for manipulating this table.
+    '''
     ...

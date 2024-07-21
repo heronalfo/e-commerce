@@ -14,4 +14,7 @@ from ..models import Product
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    '''
+    Registers a new panel for manipulating this table.
+    '''
     ...

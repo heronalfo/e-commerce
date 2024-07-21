@@ -14,4 +14,7 @@ from ..models import Costumer
 
 @admin.register(Costumer)
 class CostumerAdmin(admin.ModelAdmin):
-    ...
+    '''
+    Registers a new panel for manipulating this table.
+    '''
+  

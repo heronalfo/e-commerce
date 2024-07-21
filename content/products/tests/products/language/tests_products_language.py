@@ -28,5 +28,5 @@ class MultiLanguageProductsTest(BaseProductsTest):
         activate('pt')
         self.data['stock'] = -1
         response = self.post(self.data)
-               
+        self.assertEqual(response.status_code, 400)
         self.assertIn('Certifque-se de que este valor seja maior ou igual a 0.', response.data['stock'])        

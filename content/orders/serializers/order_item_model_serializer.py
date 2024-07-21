@@ -29,7 +29,8 @@ class OrderItemModelSerializer(serializers.ModelSerializer):
 
         model = OrderItem
         fields = '__all__'
-        read_only_fields = ['id', ]
+        read_only_fields = ['id', 'uuid', 'created_at', 
+        'updated_at', ]
 
     def validate_product(self, product):
         '''

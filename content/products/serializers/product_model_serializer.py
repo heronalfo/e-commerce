@@ -38,10 +38,12 @@ class ProductModelSerializer(serializers.ModelSerializer):
         fields = ['id', 'seller', 'name',
         'category', 'description', 'price',
         'brand', 'stock', 'tags',
-        'tags_removed', 'created_at']
+        'tags_removed', 'uuid', 'created_at', 
+        'updated_at', ]
 
-        read_only_fields = ['id', 'seller', 'tags', 'tags_removed',
-        'created_at', ]
+        read_only_fields = ['id', 'seller', 'tags',
+        'tags_removed', 'created_at', 'uuid',
+        'created_at', 'updated_at', ]
 
     def validate_category(self, category):
         '''

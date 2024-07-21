@@ -25,5 +25,8 @@ class TagModelSerializer(serializers.ModelSerializer):
         '''
 
         model = Tag
-        fields = ['id', 'name']
-        read_only_fields = ['id',]
+        fields = ['id', 'name', 'uuid',
+        'created_at', 'updated_at', ]
+        
+        read_only_fields = ['id', 'uuid', 'created_at',
+        'updated_at', ]

@@ -29,7 +29,7 @@ from .viewsets import (OrderModelViewSet, OrderItemModelViewSet, WishlistModelVi
 app_name = 'orders'
 
 router = SimpleRouter()
-router.register('items/api/v1', OrderItemModelViewSet, basename='orders-itens')
+router.register('items/api/v1', OrderItemModelViewSet, basename='orders-items')
 router.register('wishlist/api/v1', WishlistModelViewSet, basename='wishlists')
 router.register('api/v1', OrderModelViewSet, basename='orders')
 

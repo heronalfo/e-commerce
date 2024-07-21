@@ -23,14 +23,6 @@ class Shipping(Extension):
     Registration of shipping available for sale, order, costumer, address, and other details.
     '''
 
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
-    shipment_date = models.DateTimeField(auto_now_add=True)
-    address = models.CharField(max_length=202)
-    sent_at = models.DateTimeField(auto_now_add=True)
-    tracking_number = models.CharField(max_length=102)
-    shipping_method = models.CharField(max_length=102)
-
     class Meta:
         '''
         Shipping instance metadata.
@@ -38,6 +30,14 @@ class Shipping(Extension):
 
         verbose_name = 'shipping'
         verbose_name_plural = 'shippings'
+
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Costumer, on_delete=models.CASCADE)
+    shipment_date = models.DateTimeField(auto_now_add=True)
+    address = models.CharField(max_length=202)
+    sent_at = models.DateTimeField(auto_now_add=True)
+    tracking_number = models.CharField(max_length=102)
+    shipping_method = models.CharField(max_length=102)
 
     def __str__(self):
         """

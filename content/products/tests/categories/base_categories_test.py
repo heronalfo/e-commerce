@@ -1,40 +1,17 @@
 from django.urls import reverse
-from rest_framework.test import APIClient
-from accounts.tests.accounts.base_accounts_test import BaseAccountsTest
-from accounts.models import Costumer
-import pdb
+from core.tests import UniversalBaseTests
 
-class BaseCategoriesTest(BaseAccountsTest):
+class BaseCategoriesTest(UniversalBaseTests):
     def setUp(self):
         super().setUp()
-        
-        self.client_not_seller = APIClient()
-        self.user_not_seller = Costumer.objects.create_user(username='test-permissions', password='_ABC123456')
-        
-        self.data = {
-            'name': 'Clothes',
-            'description': 'Clothes of all types, linen, silk, underwear, etc.',
-        }      
+        self.client = self.create_client(is_seller=True)
+        self.category = self.create_category()
         self.api_url = reverse('products:categories-list')
-        
-    def post(self, data=None, seller=True):
-        if seller:
-            return self.client.post(self.api_url, data, format='json')
-                    
-        return self.client_not_seller.post(self.api_url, data, format='json')
-        
-    def patch(self, data=None, seller=True):
-        payload = {
-            'name': 'Shoes',
-            'description': 'Footwear of all types, shoes, sneakers, etc.',
-        }
-                             
-        create = self.post(payload)
-        api_url = reverse('products:categories-detail', kwargs={'pk': create.data['id']}) 
-        
-        if seller:
-            return self.client.patch(api_url, data, format='json')         
-        
-        return self.client_not_seller.patch(api_url, data, format='json')
+        self.api_url_detail = reverse('products:categories-detail', kwargs={'pk': self.category.id})
            
-        
+        self.data = {      
+          'name': 'Cell phones',
+          'description': 'Cell phones of all types'
+        }
+
+        self.payload = self.data.copy()

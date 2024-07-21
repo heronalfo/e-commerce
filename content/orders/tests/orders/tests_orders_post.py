@@ -3,5 +3,5 @@ import pdb
 
 class OrderModelViewSetPostTest(BaseOrdersTest):
     def test_create_order(self):
-        response = self.post(self.data)
+        response = self.post({})
         self.assertEqual(response.status_code, 201)       

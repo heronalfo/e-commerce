@@ -13,14 +13,14 @@ Author:
 """
 
 from rest_framework.viewsets import ModelViewSet
-
 from drf_yasg.utils import swagger_auto_schema
 
 from core.viewsets import BaseModelViewSet
+from core.permissions import IsSeller
+
 from ..serializers import ProductModelSerializer
 from ..models import Product
 from ..filters import ProductFilters
-from ..permissions import IsSeller
 
 class ProductModelViewSet(BaseModelViewSet):
     '''

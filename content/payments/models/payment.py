@@ -41,7 +41,6 @@ class Payment(Extension):
         Category instance metadata.
         '''
 
-        ordering = ['-created_at']
         verbose_name = 'payment'
         verbose_name_plural = 'payments'
 

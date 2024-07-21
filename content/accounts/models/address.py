@@ -19,8 +19,9 @@ Author:
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from core.models import Extension
 
-class Address(models.Model):
+class Address(Extension):
     '''
     Registering addresses from a user, road, cep, number and more.
     '''
