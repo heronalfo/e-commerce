@@ -20,7 +20,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.test import APIClient
 from products.models import Product, Category, Review, Tag
 from accounts.models import Costumer, Address
-from orders.models import Order, OrderItem
+from orders.models import Order, OrderItem, Wishlist
 
 class UniversalBaseTests(TestCase):
     '''
@@ -43,6 +43,12 @@ class UniversalBaseTests(TestCase):
         Clean up the test environment by deleting all created test data.
         '''
         Costumer.objects.all().delete()
+    
+    def get(self, is_authorizade: bool = True):
+        if is_authorizade:
+            return self.client.get(self.api_url)
+
+        return self.unauthorized_client.get(self.api_url)
 
     def post(self, data=None, is_authorizade: bool = True, format: str = 'json'):
         '''
@@ -287,3 +293,18 @@ class UniversalBaseTests(TestCase):
         )
 
         return item
+    
+    def create_wishlist(self):
+        '''
+        Helper method to create an wishlist item.
+        
+        Returns:
+            The wishlist product created.
+        '''
+
+        wishlist = Wishlist.objects.create(
+            costumer=self.costumer,
+            product=self.create_product(),
+        )
+
+        return wishlist

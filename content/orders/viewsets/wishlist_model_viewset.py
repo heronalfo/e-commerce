@@ -23,10 +23,7 @@ class WishlistModelViewSet(OrderModelViewSet):
     '''
     queryset = Wishlist.objects.all()
     serializer_class = WishlistModelSerializer
-    http_method_names = ['post', 'delete', 'head', 'options']
-
-    def perform_update(self, serializer):
-        serializer.save()
+    http_method_names = ['get', 'post', 'delete', 'head', 'options']
 
     @swagger_auto_schema(
         operation_description='Create a new Wishlist item. Only authenticated users can create wishlist itens.',
@@ -40,16 +37,6 @@ class WishlistModelViewSet(OrderModelViewSet):
     def create(self, *args, **kwargs):
         return super().create(*args, **kwargs)
 
-    @swagger_auto_schema(
-        operation_description='Update an wishlist item. Only the owner can update wishlistss itens.',
-        responses={
-            200: 'Wishlist edited successfully',
-            400: 'There was an error in the request',
-            401: 'Action not authorized. Only authenticated users can edit wishlistss itens',
-            403: 'Only owners can edit an wishlist item',
-            404: 'Wishlist item not found'
-        }
-    )
     def update(self, *args, **kwargs):
         return super().update(*args, **kwargs)
 

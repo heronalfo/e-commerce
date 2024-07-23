@@ -28,7 +28,9 @@ class OrderItemModelSerializer(serializers.ModelSerializer):
         '''
 
         model = OrderItem
-        fields = '__all__'
+        fields = ['id', 'product', 'quantity',
+        'uuid', 'created_at', 'updated_at']
+
         read_only_fields = ['id', 'uuid', 'created_at', 
         'updated_at', ]
 

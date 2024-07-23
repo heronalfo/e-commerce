@@ -1,5 +1,4 @@
 from .base_categories_test import BaseCategoriesTest
-import pdb
 
 class CategoriesModelViewSetPatchTest(BaseCategoriesTest):
     def test_categories_patch(self):

@@ -12,21 +12,29 @@ Author:
     Pypeu (heronalfo)
 '''
 
+from core.viewsets import BaseModelViewSet
+from core.permissions import IsOwner
+from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
-from .order_model_viewset import OrderModelViewSet
 from ..serializers import OrderItemModelSerializer
 from ..models import OrderItem
 
-class OrderItemModelViewSet(OrderModelViewSet):
+class OrderItemModelViewSet(BaseModelViewSet):
     '''
     This class is responsible for operating CRUD functionalities
     '''
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemModelSerializer
-    http_method_names = ['post', 'delete', 'patch', 'head', 'options']
-    
-    def perform_update(self, serializer):
-        serializer.save()
+    http_method_names = ['post', 'patch', 'delete', 'head', 'options']
+
+    def get_permissions(self):
+        """
+        Sets permissions based on the requested action.
+        """
+        if self.action in ['create', 'partial_update']:
+            return [IsAuthenticated(),]
+
+        return super().get_permissions()
 
     @swagger_auto_schema(
         operation_description='Create a new order item. Only authenticated users can create orders itens.',

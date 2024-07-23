@@ -1,5 +1,4 @@
 from .base_reviews_test import BaseReviewsTest
-import pdb
 
 class ReviewModelViewSetPostTest(BaseReviewsTest):
     def test_create_comment(self):
