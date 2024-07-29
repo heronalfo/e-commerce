@@ -27,7 +27,7 @@ class OrderModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         '''
-        Meta data manipulation for Category.
+        Meta data manipulation for Orders.
         '''
 
         model = Order

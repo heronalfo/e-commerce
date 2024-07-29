@@ -52,6 +52,7 @@ pip-delete-this-directory.txt
 
 # Coverage
 .coverage
+.coveragerc
 coverage.xml
 
 # Tox

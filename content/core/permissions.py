@@ -10,6 +10,10 @@ Classes:
     IsSeller: Check if user is Seller.
     
     IsOwner: Checks whether the user owns a given object.
+    
+    IsOwnerOfUser: Checks if the user owns the account.
+    
+    IsOwnerOfCart: Check the item is part of a cart where the customer owns.
 
 Author:
     PyPeu (heronalfo)
@@ -45,7 +49,7 @@ class IsOwner(BasePermission):
         '''
         Checks if the user is the instance creator
         '''
-        return obj.costumer == request.user
+        return not request.user.is_anonymous and obj.costumer == request.user
 
 class IsOwnerOfUser(BasePermission):
     ''' 
@@ -55,4 +59,14 @@ class IsOwnerOfUser(BasePermission):
         '''
         Checks if the object's username is the client's username 
         '''
-        return obj.username is request.user.username
+        return not request.user.is_anonymous and obj.username is request.user.username
+
+class IsOwnerOfCart(BasePermission):
+    '''
+    Permission created for cart maintenance.
+    '''
+    def has_object_permission(self, request, view, obj):
+        '''
+        Checks if the item is part of a cart where the costumer is the owner.
+        '''
+        return not request.user.is_anonymous and obj.cart.costumer == request.user
