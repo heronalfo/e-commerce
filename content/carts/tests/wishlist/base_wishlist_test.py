@@ -7,8 +7,8 @@ class BaseWishlistTest(UniversalBaseTests):
         self.client = self.create_client(is_seller=True)
         self.wishlist = self.create_wishlist()
         self.product = self.create_product()
-        self.api_url = reverse('orders:wishlists-list')
-        self.api_url_detail = reverse('orders:wishlists-detail', kwargs={'pk': self.wishlist.id})
+        self.api_url = reverse('carts:wishlists-list')
+        self.api_url_detail = reverse('carts:wishlists-detail', kwargs={'pk': self.wishlist.id})
 
         self.data = {
             'costumer': self.costumer.id,

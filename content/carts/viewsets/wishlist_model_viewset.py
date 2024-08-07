@@ -13,7 +13,7 @@ Author:
 '''
 
 from drf_yasg.utils import swagger_auto_schema
-from .order_model_viewset import OrderModelViewSet
+from orders.viewsets.order_model_viewset import OrderModelViewSet
 from ..serializers import WishlistModelSerializer
 from ..models import Wishlist
 
